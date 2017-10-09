@@ -49,6 +49,12 @@ class PostController extends Controller
         return response(['message' => 'Post edited successfully'],200);
     }
 
+    public function showPostComment($id)
+    {
+        $post = Post::with('comments')->where('id', '=', $id)->get();
+        return response(['data' => $post],200);
+    }
+
     public function destroyPost($id)
     {
         $post = Post::find($id);
