@@ -23,9 +23,22 @@ class PostController extends Controller
 
     public function addPost()
     {
+        $exploded = explode(',', request('image'));
+        $decoded = base64_decode($exploded[1]);
+        if (str_contains($exploded[0], 'jpeg'))
+        {
+            $extension = 'jpg';
+        } else
+            $extension = 'png';
+        $file_name = time() . '.' . $extension;
+
+        $path = public_path('/uploads/posts-images/' . $file_name);
+        file_put_contents($path, $decoded);
+
         Post::create([
             'title' => request('title'),
             'body' => request('body'),
+            'image' => $file_name,
             'user_id' => Auth::user()->id,
             'category_id' => request('category_id')
         ]);
