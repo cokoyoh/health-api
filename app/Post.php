@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['title','body','category_id'];
+    protected $fillable = ['title','body','category_id','user_id','image'];
 
     public function category()
     {
@@ -16,5 +16,16 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getBodyAttribute($value)
+    {
+        $body = explode("\n", $value);
+        return $body;
     }
 }

@@ -15,9 +15,10 @@ class CreateApplinksTable extends Migration
     {
         Schema::create('applinks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image')->default('default-app.png');
+            $table->string('image')->default('default-app.jpg');
             $table->text('title')->nullable();
             $table->text('description')->nullable();
+            $table->string('uri');
             $table->timestamps();
         });
     }

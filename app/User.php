@@ -43,18 +43,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function cars()
+    public function posts()
     {
-        return $this->hasMany(Car::class);
-    }
-
-    public function transports()
-    {
-        return $this->hasMany(Transport::class);
-    }
-
-    public function booking()
-    {
-        return $this->hasMany(Booking::class);
+        return $this->hasMany(Post::class);
     }
 }

@@ -10,15 +10,39 @@ class PostController extends Controller
 {
     public function showAllPosts()
     {
-        $posts = Post::with('category')->orderBy('id','desc')->get();
-        return response(['data' => $posts],200);
+        $posts = Post::with('category')->orderBy('id', 'desc')->get();
+        return response(['data' => $posts], 200);
+    }
+
+    public function showLatestPost()
+    {
+        $lates_post = Post::with('category')->orderBy('id', 'desc')->first();
+        return response(['data' => $lates_post], 200);
+    }
+
+    public function showFitnessPosts()
+    {
+        $fitness_posts = Post::where('category_id', '=', 2)->orderBy('id','desc')->get();
+        return response(['data' => $fitness_posts],200);
+    }
+
+    public function showMedicinePosts()
+    {
+        $medicine_posts = Post::where('category_id', '=', 1)->orderBy('id','desc')->get();
+        return response(['data' => $medicine_posts],200);
+    }
+
+    public function showDiseasesPosts()
+    {
+        $diseases_posts = Post::where('category_id', '=', 3)->orderBy('id','desc')->get();
+        return response(['data' => $diseases_posts],200);
     }
 
     public function postsToday()
     {
         $posts_today = Post::with('categories')->where('created_at', '=', Carbon::today())
-                    ->orderBy('id','desc')->get();
-        return response(['data', $posts_today],200);
+            ->orderBy('id', 'desc')->get();
+        return response(['data', $posts_today], 200);
     }
 
     public function addPost()
@@ -43,13 +67,13 @@ class PostController extends Controller
             'category_id' => request('category_id')
         ]);
 
-        return response(['message' => 'New post added'],200);
+        return response(['message' => 'New article has been successfully added'], 200);
     }
 
     public function showPost($id)
     {
         $post = Post::find($id);
-        return response(['data' => $post],200);
+        return response(['data' => $post], 200);
     }
 
     public function updatePost($id)
@@ -59,19 +83,19 @@ class PostController extends Controller
         $post->body = request('body');
         $post->category = request('category');
         $post->save();
-        return response(['message' => 'Post edited successfully'],200);
+        return response(['message' => 'Post edited successfully'], 200);
     }
 
     public function showPostComment($id)
     {
         $post = Post::with('comments')->where('id', '=', $id)->get();
-        return response(['data' => $post],200);
+        return response(['data' => $post], 200);
     }
 
     public function destroyPost($id)
     {
         $post = Post::find($id);
         $post->delete();
-        return response(['message' => 'Post has been deleted!'],200);
+        return response(['message' => 'Post has been deleted!'], 200);
     }
 }

@@ -29,7 +29,8 @@ class ApplinkController extends Controller
         Applink::create([
             'image' =>  $file_name,
             'title' => request('title'),
-            'description' => request('description')
+            'description' => request('description'),
+            'uri' => request('uri')
         ]);
         return response(['message' => 'App link uploaded successfully'],200);
     }
