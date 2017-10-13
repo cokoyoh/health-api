@@ -10,6 +10,7 @@ $factory->define(App\Post::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(6,true),
         'body' => $faker-> paragraphs(3,true),
+        'summary' => $faker->  paragraph(6),
         'user_id' => $user->id,
         'category_id' => $category->id
     ];

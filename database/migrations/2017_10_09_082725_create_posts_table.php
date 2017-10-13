@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->text('title');
             $table->text('body');
+            $table->text('summary');
             $table->string('image')->default('default-post.png');
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
