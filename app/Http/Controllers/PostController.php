@@ -68,7 +68,7 @@ class PostController extends Controller
             'category_id' => request('category_id')
         ]);
 
-        return response(['message' => 'New article has been successfully added'], 200);
+        return response(['message' => 'New article has been successfully added!'], 200);
     }
 
     public function showPost($id)
